@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7a3155" />
+  <title>Melinda születésnapi meglepetése</title>
+  <style>
+    :root {
+      --bg1: #fff3f8;
+      --bg2: #f3e8ff;
+      --accent: #7a3155;
+      --accent2: #b85c8c;
+      --gold: #b98935;
+      --text: #3c2631;
+      --card: rgba(255,255,255,.88);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #ffffff 0, transparent 34%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      width: min(720px, 100%);
+      background: var(--card);
+      border: 1px solid rgba(122,49,85,.12);
+      border-radius: 28px;
+      box-shadow: 0 24px 80px rgba(76,34,57,.18);
+      backdrop-filter: blur(10px);
+      padding: clamp(24px, 5vw, 48px);
+      text-align: center;
+    }
+
+    .lock {
+      font-size: 56px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 7vw, 58px);
+      line-height: 1.05;
+      color: var(--accent);
+    }
+
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--accent);
+      font-size: clamp(27px, 5vw, 40px);
+      margin-top: 8px;
+    }
+
+    p {
+      font-size: clamp(17px, 3.5vw, 20px);
+      line-height: 1.65;
+    }
+
+    .muted { opacity: .75; }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 15px 17px;
+      border-radius: 14px;
+      border: 1px solid rgba(122,49,85,.25);
+      font-size: 17px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus {
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(184,92,140,.12);
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 15px 20px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(122,49,85,.22);
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .error {
+      min-height: 24px;
+      margin-top: 10px;
+      color: #a11d3a;
+      font-weight: 700;
+    }
+
+    #surprise { display: none; }
+
+    .intro {
+      font-style: italic;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--accent);
+      font-size: 21px;
+    }
+
+    .voucher {
+      margin: 32px auto 24px;
+      padding: 28px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,247,229,.94));
+      border: 2px dashed rgba(185,137,53,.55);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .voucher:before, .voucher:after {
+      content: "✦";
+      position: absolute;
+      color: rgba(185,137,53,.35);
+      font-size: 78px;
+    }
+
+    .voucher:before { top: -22px; left: 8px; }
+    .voucher:after { right: 8px; bottom: -26px; }
+
+    .voucher-title {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-weight: 800;
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    .voucher-code {
+      margin: 18px auto 8px;
+      padding: 16px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid rgba(185,137,53,.3);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(18px, 5vw, 28px);
+      font-weight: 800;
+      letter-spacing: .05em;
+      word-break: break-all;
+    }
+
+    .signature {
+      margin-top: 28px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      color: var(--accent);
+    }
+
+    .small {
+      font-size: 14px;
+      opacity: .7;
+    }
+
+    .balloon {
+      position: fixed;
+      bottom: -160px;
+      width: 54px;
+      height: 70px;
+      border-radius: 50% 50% 45% 45%;
+      opacity: .85;
+      z-index: 1;
+      animation: floatUp linear forwards;
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 68px;
+      width: 1px;
+      height: 100px;
+      background: rgba(80,40,60,.3);
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-125vh) rotate(12deg); }
+    }
+
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 10px;
+      height: 16px;
+      z-index: 5;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(900deg); }
+    }
+
+    .fade-in {
+      animation: fadeIn .9s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 560px) {
+      .input-row { flex-direction: column; }
+      button { width: 100%; }
+      .card { border-radius: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section id="login" class="card fade-in">
+      <div class="lock">🔐</div>
+      <h2>Egy meglepetés vár rád</h2>
+      <p class="muted">Írd be a képeslapon található jelszót!</p>
+
+      <div class="input-row">
+        <input
+          id="password"
+          type="password"
+          placeholder="Jelszó"
+          autocomplete="off"
+          aria-label="Jelszó"
+        />
+        <button id="openButton" type="button">Megnyitás 🎁</button>
+      </div>
+      <div id="error" class="error" aria-live="polite"></div>
+    </section>
+
+    <section id="surprise" class="card">
+      <div style="font-size:64px">🎂</div>
+      <h1>Boldog születésnapot, Melinda!</h1>
+
+      <p class="intro">
+        „Van, aki ajándékot ad. Mi egy mosolyt is szerettünk volna adni mellé.”
+      </p>
+
+      <p>
+        Kívánjuk, hogy az előtted álló év tele legyen örömmel, egészséggel,
+        nevetéssel és sok olyan pillanattal, amelyre mindig jó lesz visszagondolni.
+      </p>
+
+      <p>
+        Köszönjük, hogy vagy nekünk. Fogadd szeretettel ezt a kis meglepetést!
+      </p>
+
+      <div class="voucher">
+        <div class="voucher-title">Születésnapi ajándékutalvány</div>
+        <h2 style="margin-bottom:8px">🎁 A te ajándékod</h2>
+        <p class="muted" style="margin-top:0">Az utalvány beváltásához használd az alábbi kódot:</p>
+
+        <!-- CSERÉLD KI AZ ALÁBBI SZÖVEGET A VALÓDI UTALVÁNYKÓDRA -->
+        <div class="voucher-code">IDE ÍRD AZ UTALVÁNY KÓDJÁT</div>
+
+        <p class="small">
+          A kódot tartsd meg, és a vásárolt utalvány feltételei szerint használd fel.
+        </p>
+      </div>
+
+      <div class="signature">
+        ❤️ Szeretettel:<br />
+        <strong>Hanci, Reni és Csabi</strong>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // A jelszó itt módosítható:
+    const CORRECT_PASSWORD = "Melinda#Szuletesnap2026!";
+
+    const login = document.getElementById("login");
+    const surprise = document.getElementById("surprise");
+    const passwordInput = document.getElementById("password");
+    const openButton = document.getElementById("openButton");
+    const errorBox = document.getElementById("error");
+
+    function openGift() {
+      if (passwordInput.value === CORRECT_PASSWORD) {
+        errorBox.textContent = "";
+        login.style.display = "none";
+        surprise.style.display = "block";
+        surprise.classList.add("fade-in");
+        launchCelebration();
+      } else {
+        errorBox.textContent = "A jelszó nem megfelelő. Próbáld újra!";
+        passwordInput.select();
+      }
+    }
+
+    openButton.addEventListener("click", openGift);
+    passwordInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") openGift();
+    });
+
+    function launchCelebration() {
+      const colors = ["#7a3155", "#b85c8c", "#b98935", "#7f6bd8", "#e58f65"];
+
+      for (let i = 0; i < 90; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (2.5 + Math.random() * 3) + "s";
+        piece.style.animationDelay = (Math.random() * 1.2) + "s";
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 7000);
+      }
+
+      for (let i = 0; i < 10; i++) {
+        const balloon = document.createElement("div");
+        balloon.className = "balloon";
+        balloon.style.left = (5 + Math.random() * 90) + "vw";
+        balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.animationDuration = (6 + Math.random() * 5) + "s";
+        balloon.style.animationDelay = (Math.random() * 2) + "s";
+        document.body.appendChild(balloon);
+        setTimeout(() => balloon.remove(), 13000);
+      }
+    }
+  </script>
+</body>
+</html>
