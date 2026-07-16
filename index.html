@@ -3,249 +3,139 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080808">
-<title>Neverland Secret Mission – Melinda</title>
+<meta name="theme-color" content="#090909">
+<title>Project 2113 - Melinda</title>
 <style>
-:root{--bg:#080808;--panel:#111;--gold:#d7b45a;--gold2:#f2d98e;--text:#f6f1e5;--muted:#b8ad97;--ok:#70d890;--bad:#ff7a91}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:
-radial-gradient(circle at 50% -10%,rgba(215,180,90,.20),transparent 34%),
-linear-gradient(180deg,#070707,#111 58%,#080808);color:var(--text);
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-body{min-height:100vh;overflow-x:hidden}
-main{min-height:100vh;display:grid;place-items:center;padding:20px;position:relative;z-index:2}
-.panel{width:min(780px,100%);background:rgba(14,14,14,.92);border:1px solid rgba(215,180,90,.38);
-border-radius:26px;padding:clamp(23px,5vw,48px);box-shadow:0 28px 100px #000a;text-align:center;
-backdrop-filter:blur(12px)}
-.kicker{letter-spacing:.22em;color:var(--gold);font-size:12px;font-weight:900;text-transform:uppercase}
-h1,h2{font-family:Georgia,"Times New Roman",serif;color:var(--gold2)}
-h1{font-size:clamp(38px,8vw,65px);line-height:1.02;margin:12px 0 20px}
-h2{font-size:clamp(27px,5vw,42px);margin:10px 0 14px}
-p{font-size:clamp(17px,3.2vw,20px);line-height:1.65}
-.small{font-size:13px;color:var(--muted)}
-.lock{font-size:64px;filter:drop-shadow(0 0 18px rgba(215,180,90,.45))}
-.row{display:flex;gap:10px;margin-top:22px}
-input{flex:1;min-width:0;padding:16px 17px;border-radius:13px;border:1px solid #5e5031;background:#070707;
-color:#fff;font-size:17px;outline:none}
-input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(215,180,90,.13)}
-button{border:0;border-radius:13px;padding:16px 20px;color:#17120a;background:linear-gradient(135deg,var(--gold),var(--gold2));
-font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 12px 30px rgba(215,180,90,.18)}
-button.secondary{background:#16130d;color:var(--gold2);border:1px solid #5e5031}
-button:hover{transform:translateY(-1px)} button:disabled{opacity:.6}
-.error{min-height:25px;color:var(--bad);font-weight:800;margin-top:10px}
-.ok{color:var(--ok);font-weight:900}
-.terminal{margin:22px 0;padding:18px;text-align:left;border-radius:14px;background:#050505;border:1px solid #353024;
-font:15px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#e8d8aa}
-.bar{height:11px;background:#272319;border-radius:99px;overflow:hidden;margin:15px 0}
-.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#8e6f2e,var(--gold2));transition:width 1.4s ease}
-.step{display:none} .step.active{display:block;animation:fade .7s ease both}
-@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.stats{display:grid;gap:8px;text-align:left;max-width:520px;margin:22px auto;padding:18px;border:1px solid #3d3524;border-radius:16px;background:#0a0a0a}
-.stat{display:flex;justify-content:space-between;gap:15px;color:#eee}
-.stat b{color:var(--gold2)}
-.icons{font-size:34px;letter-spacing:.16em;margin:22px 0}
-.final-box{margin-top:28px;padding:25px;border:1px solid rgba(215,180,90,.55);border-radius:20px;
-background:linear-gradient(145deg,rgba(215,180,90,.10),rgba(255,255,255,.025))}
-.signature{font-family:Georgia,"Times New Roman",serif;color:var(--gold2);font-size:23px;margin-top:26px}
-.confetti{position:fixed;top:-18px;width:9px;height:15px;z-index:5;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(900deg)}}
-.code-lock{display:flex;justify-content:center;gap:10px;margin:28px auto}
-.wheel{width:68px;height:88px;border-radius:13px;border:2px solid #7d6737;background:linear-gradient(#222,#080808,#222);
-display:grid;place-items:center;font:900 42px/1 ui-monospace,monospace;color:var(--gold2);box-shadow:inset 0 0 20px #000,0 8px 25px #0008;
-position:relative;overflow:hidden}
-.wheel::before,.wheel::after{content:"";position:absolute;left:0;right:0;height:2px;background:#6d5930}
-.wheel::before{top:24px} .wheel::after{bottom:24px}
-.spin{animation:spin .9s ease}
-@keyframes spin{0%{filter:blur(0)}40%{transform:translateY(-8px);filter:blur(3px)}100%{transform:none;filter:none}}
-.code-joke{margin:22px auto;max-width:600px;text-align:left}
-.code-joke code{display:block;white-space:pre-wrap;background:#050505;border:1px solid #353024;border-radius:14px;padding:18px;
-font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#d9efc5}
-.music{position:fixed;right:14px;bottom:14px;z-index:10;border-radius:999px;padding:12px 15px;font-size:14px}
+:root{--gold:#d8b25a;--gold2:#f4dc9b;--red:#a71420;--text:#f7f2e8;--muted:#b9ad96;--ok:#69dc93;--bad:#ff7186}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#060606;color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{min-height:100vh;overflow-x:hidden;background:
+radial-gradient(circle at 50% -5%,rgba(216,178,90,.19),transparent 31%),
+radial-gradient(circle at 10% 60%,rgba(167,20,32,.12),transparent 30%),
+linear-gradient(180deg,#060606,#131313 60%,#080808)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;background-image:repeating-linear-gradient(90deg,transparent 0 58px,rgba(255,255,255,.05) 59px,transparent 60px)}
+main{min-height:100vh;display:grid;place-items:center;padding:18px;position:relative;z-index:2}
+.panel{width:min(840px,100%);background:rgba(13,13,13,.94);border:1px solid rgba(216,178,90,.38);border-radius:28px;padding:clamp(23px,5vw,50px);box-shadow:0 30px 110px #000c;text-align:center;backdrop-filter:blur(14px);position:relative;overflow:hidden}
+.panel:before{content:"";position:absolute;inset:-60% -20%;background:linear-gradient(115deg,transparent 43%,rgba(255,255,255,.05),transparent 57%);animation:sweep 8s infinite;pointer-events:none}
+@keyframes sweep{to{transform:translateX(40%)}}
+.kicker{letter-spacing:.23em;color:var(--gold);font-size:12px;font-weight:900;text-transform:uppercase}
+h1,h2{font-family:Georgia,"Times New Roman",serif;color:var(--gold2)}h1{font-size:clamp(38px,8vw,68px);line-height:1.02;margin:12px 0 20px}h2{font-size:clamp(27px,5vw,43px);margin:10px 0 14px}
+p{font-size:clamp(17px,3.1vw,20px);line-height:1.65}.small{font-size:13px;color:var(--muted)}.row{display:flex;gap:10px;margin-top:22px}
+input{flex:1;min-width:0;padding:16px 17px;border-radius:13px;border:1px solid #605235;background:#070707;color:#fff;font-size:17px;outline:none}
+input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(216,178,90,.13)}button{border:0;border-radius:13px;padding:16px 20px;color:#17120a;background:linear-gradient(135deg,var(--gold),var(--gold2));font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 12px 30px rgba(216,178,90,.18)}
+button.secondary{background:#17140e;color:var(--gold2);border:1px solid #5c4e32}button:disabled{opacity:.6}.error{min-height:25px;color:var(--bad);font-weight:800;margin-top:10px}.ok{color:var(--ok);font-weight:900}
+.terminal{margin:22px 0;padding:18px;text-align:left;border-radius:14px;background:#040404;border:1px solid #353024;font:15px/1.72 ui-monospace,SFMono-Regular,Menlo,monospace;color:#e8d8aa}
+.bar{height:11px;background:#282319;border-radius:99px;overflow:hidden;margin:15px 0}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#8e6f2e,var(--gold2));transition:width 1.5s ease}
+.step{display:none}.step.active{display:block;animation:fade .75s ease both}@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* CSS vault */
+.vault-wrap{display:grid;place-items:center;margin:20px 0 26px;perspective:900px}.vault{width:min(270px,65vw);aspect-ratio:1;border-radius:50%;position:relative;background:radial-gradient(circle,#393939 0 13%,#1c1c1c 14% 47%,#555 48% 51%,#151515 52% 67%,#686868 68% 71%,#161616 72%);box-shadow:inset 0 0 28px #000,0 18px 50px #000b;border:5px solid #725f34;transform-origin:8% 50%;transition:transform 1.3s cubic-bezier(.2,.8,.2,1),filter .4s}
+.vault.open{transform:rotateY(-82deg);filter:drop-shadow(15px 10px 20px #000)}.vault:before{content:"";position:absolute;inset:36%;border:8px solid #b39755;border-radius:50%;box-shadow:0 0 0 5px #2a2a2a}.vault:after{content:"";position:absolute;width:42%;height:9%;left:29%;top:46%;background:#b39755;border-radius:99px;box-shadow:0 -45px 0 -15px #b39755,0 45px 0 -15px #b39755;transform:rotate(0deg);transition:transform .8s}.vault.unlocking:after{transform:rotate(180deg)}.vault-glow{position:absolute;width:min(250px,60vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,218,120,.35),transparent 65%);opacity:0;transition:.6s}.vault-glow.on{opacity:1;transform:scale(1.25)}
+.stats{display:grid;gap:9px;text-align:left;max-width:590px;margin:22px auto;padding:19px;border:1px solid #3d3524;border-radius:16px;background:#090909}.stat{display:flex;justify-content:space-between;gap:15px}.stat b{color:var(--gold2)}.meter{height:8px;background:#29251d;border-radius:99px;overflow:hidden;margin-top:4px}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:99px}
+.code-lock{display:flex;justify-content:center;gap:10px;margin:28px auto}.wheel{width:68px;height:88px;border-radius:13px;border:2px solid #7d6737;background:linear-gradient(#222,#080808,#222);display:grid;place-items:center;font:900 42px/1 ui-monospace,monospace;color:var(--gold2);box-shadow:inset 0 0 20px #000,0 8px 25px #0008;position:relative;overflow:hidden}.wheel:before,.wheel:after{content:"";position:absolute;left:0;right:0;height:2px;background:#6d5930}.wheel:before{top:24px}.wheel:after{bottom:24px}.spin{animation:spin .95s ease}@keyframes spin{40%{transform:translateY(-8px);filter:blur(3px)}100%{transform:none;filter:none}}
+.code-joke code{display:block;white-space:pre-wrap;background:#040404;border:1px solid #353024;border-radius:14px;padding:18px;text-align:left;font:14px/1.65 ui-monospace,monospace;color:#d8edc6}.icons{font-size:34px;letter-spacing:.1em;margin:22px 0}
+.final-box{margin-top:28px;padding:25px;border:1px solid rgba(216,178,90,.55);border-radius:20px;background:linear-gradient(145deg,rgba(216,178,90,.11),rgba(255,255,255,.025))}.signature{font-family:Georgia,serif;color:var(--gold2);font-size:23px;margin-top:26px}
+.music{position:fixed;right:14px;bottom:14px;z-index:20;border-radius:999px;padding:12px 15px;font-size:14px}.music-menu{position:fixed;right:14px;bottom:70px;z-index:20;background:#111;border:1px solid #574a30;border-radius:14px;padding:10px;display:none;gap:8px;flex-direction:column}.music-menu.show{display:flex}.music-menu button{padding:10px 12px;font-size:13px}
+.overlay{position:fixed;inset:0;background:#000;z-index:50;display:none;place-items:center;text-align:center;padding:20px}.overlay.show{display:grid}.count{font:900 clamp(80px,25vw,180px)/1 Georgia,serif;color:var(--gold2);text-shadow:0 0 35px rgba(216,178,90,.6)}.flash{animation:flash .8s ease}@keyframes flash{50%{box-shadow:0 0 85px rgba(216,178,90,.85);transform:scale(1.008)}}
+.confetti{position:fixed;top:-18px;width:9px;height:15px;z-index:55;animation:fall linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(900deg)}}
+.badge{margin:24px auto 5px;width:min(360px,90%);padding:22px;border-radius:20px;border:2px solid var(--gold);background:radial-gradient(circle at top,#3c321d,#101010 70%);box-shadow:0 15px 45px #0008}.badge .star{font-size:42px}
 @media(max-width:560px){.row{flex-direction:column}button{width:100%}.wheel{width:58px;height:78px;font-size:36px}}
-</style>
-</head>
+</style></head>
 <body>
-<button id="musicBtn" class="music secondary">🎵 Hangulat</button>
-<main>
-<section class="panel">
-
+<audio id="music1" src="assets/bank_heist_ambient.wav" loop preload="auto"></audio>
+<audio id="music2" src="assets/mystery_magic_ambient.wav" loop preload="auto"></audio>
+<audio id="sLock" src="assets/vault_unlock.wav" preload="auto"></audio><audio id="sOk" src="assets/access_granted.wav" preload="auto"></audio>
+<audio id="sErr" src="assets/access_denied.wav" preload="auto"></audio><audio id="sTick" src="assets/dial_tick.wav" preload="auto"></audio>
+<audio id="sSuccess" src="assets/mission_success.wav" preload="auto"></audio><audio id="sCount" src="assets/countdown.wav" preload="auto"></audio>
+<button id="musicBtn" class="music secondary">🎵 Zene</button>
+<div id="musicMenu" class="music-menu"><button id="m1">🏦 Páncélterem</button><button id="m2">✨ Misztikus</button><button id="mOff" class="secondary">🔇 Kikapcsolás</button></div>
+<div id="overlay" class="overlay"><div><div class="kicker">Decrypting reward</div><div id="countdown" class="count">3</div></div></div>
+<main><section id="panel" class="panel">
 <div id="step1" class="step active">
-  <div class="kicker">Neverland Security System</div>
-  <div class="lock">🔐</div>
-  <h2>Szigorúan bizalmas küldetés</h2>
-  <p>Kizárólag Melinda részére.</p>
-  <div class="terminal">Kapcsolódás…<br>Játékosprofil betöltése…<br>Hozzáférési kód szükséges.</div>
-  <div class="row">
-    <input id="password" type="password" placeholder="Jelszó" autocomplete="off">
-    <button id="passwordBtn">Hozzáférés</button>
-  </div>
-  <div id="passwordError" class="error"></div>
+<div class="kicker">Project 2113 - Secure Vault Protocol</div>
+<div class="vault-wrap"><div id="vaultGlow" class="vault-glow"></div><div id="vault" class="vault"></div></div>
+<h2>Szigorúan bizalmas küldetés</h2><p>Kizárólag Melinda részére.</p>
+<div class="terminal" id="introTerminal">Connecting to secure vault...<br>Loading player profile...<br>Encrypted mission detected...</div>
+<div class="row"><input id="password" type="password" placeholder="Hozzáférési jelszó"><button id="passwordBtn">Belépés</button></div><div id="passwordError" class="error"></div>
+<p class="small">A személyes végső üzenet AES-GCM titkosítással védett.</p>
 </div>
 
 <div id="step2" class="step">
-  <div class="kicker">Player Database</div>
-  <h2>Azonosítás folyamatban…</h2>
-  <div class="terminal">Játékosprofil felismerve.<br>További azonosítás szükséges.
-    <div class="bar"><span id="scanBar"></span></div><span id="scanText">0%</span>
-  </div>
-  <p><strong>Mi a csapatotok neve, amellyel a szabadulószobákban játszotok?</strong></p>
-  <div class="row">
-    <input id="team" type="text" placeholder="Csapatnév" autocomplete="off">
-    <button id="teamBtn">Ellenőrzés</button>
-  </div>
-  <div id="teamError" class="error"></div>
+<div class="kicker">Player Database</div><h2>Játékos azonosítása</h2>
+<div class="terminal">Searching database...<div class="bar"><span id="scanBar"></span></div><span id="scanText">0%</span></div>
+<p><strong>Mi a közös csapatnevetek, amikor szabadulószobában játszotok?</strong></p>
+<div class="row"><input id="team" placeholder="Csapatnév"><button id="teamBtn">Azonosítás</button></div><div id="teamError" class="error"></div>
 </div>
 
 <div id="step3" class="step">
-  <div class="kicker">Identity Verified</div>
-  <h2>Üdv újra, Fornák Team!</h2>
-  <div class="stats">
-    <div class="stat"><span>Azonosítás</span><b>SIKERES</b></div>
-    <div class="stat"><span>Visszatérő játékosok</span><b>IGEN</b></div>
-    <div class="stat"><span>Kalandvágy</span><b>MAXIMUM</b></div>
-    <div class="stat"><span>Humor</span><b>KÖTELEZŐ FELSZERELÉS</b></div>
-    <div class="stat"><span>Születésnap</span><b>JÚLIUS 3. – MEGÜNNEPELVE</b></div>
-  </div>
-  <button id="postcodeStart">Kódlakat aktiválása</button>
+<div class="kicker">Identity Verified</div><h2>Üdv újra, Fornák Team!</h2>
+<div class="stats">
+<div><div class="stat"><span>Team found</span><b>CONFIRMED</b></div></div>
+<div><div class="stat"><span>Coffee level</span><b>98%</b></div><div class="meter"><i style="width:98%"></i></div></div>
+<div><div class="stat"><span>Puzzle arguments</span><b>CLASSIFIED</b></div><div class="meter"><i style="width:63%"></i></div></div>
+<div><div class="stat"><span>Humor</span><b>∞</b></div><div class="meter"><i style="width:100%"></i></div></div>
+<div><div class="stat"><span>Team spirit</span><b>100%</b></div><div class="meter"><i style="width:100%"></i></div></div>
+<div><div class="stat"><span>Születésnap</span><b>JÚLIUS 3. - MEGÜNNEPELVE</b></div></div>
+</div>
+<div id="randomJoke" class="terminal"></div>
+<button id="postcodeStart">Kódlakat aktiválása</button>
 </div>
 
 <div id="step4" class="step">
-  <div class="kicker">Mechanikus zár</div>
-  <h2>Helymeghatározási kód</h2>
-  <p>Add meg annak a helynek az irányítószámát, ahol most vagytok.</p>
-  <div class="code-lock" aria-label="Négyjegyű kódlakat">
-    <div class="wheel" id="w1">0</div><div class="wheel" id="w2">0</div>
-    <div class="wheel" id="w3">0</div><div class="wheel" id="w4">0</div>
-  </div>
-  <div class="row">
-    <input id="postcode" type="number" inputmode="numeric" placeholder="Irányítószám">
-    <button id="postcodeBtn">Zár próbája</button>
-  </div>
-  <div id="postcodeError" class="error"></div>
+<div class="kicker">Mechanical Vault Lock</div><h2>Helymeghatározási kód</h2>
+<p>Add meg annak a helynek az irányítószámát, ahol most vagytok.</p>
+<div class="code-lock"><div class="wheel" id="w1">0</div><div class="wheel" id="w2">0</div><div class="wheel" id="w3">0</div><div class="wheel" id="w4">0</div></div>
+<div class="row"><input id="postcode" inputmode="numeric" placeholder="Irányítószám"><button id="postcodeBtn">Zár próbája</button></div><div id="postcodeError" class="error"></div>
 </div>
 
 <div id="step5" class="step">
-  <div class="kicker">Személyiségteszt</div>
-  <h2>Hány évesnek érzed magad?</h2>
-  <p>A rendszer figyelmeztet: nincs rossz válasz. Csak gyanúsan optimista.</p>
-  <div class="row">
-    <input id="feltAge" type="text" inputmode="numeric" placeholder="Bármilyen válasz jöhet">
-    <button id="ageBtn">Beküldés</button>
-  </div>
-  <div id="ageResult" class="ok"></div>
-  <div id="codeJoke" class="code-joke" style="display:none">
-    <code>if (feltAge &lt; actualAge) {
-  status = "Fiatalos üzemmód aktiválva";
-} else {
-  status = "Bölcsességcsomag sikeresen telepítve";
-}
-
-while (cakeExists) {
-  eatCake();
-}</code>
-    <button id="logicStart" style="margin-top:16px">Utolsó ellenőrzés</button>
-  </div>
+<div class="kicker">Biometric Age Scanner</div><h2>Hány évesnek érzed magad?</h2>
+<p>A rendszer figyelmeztet: nincs rossz válasz. Csak gyanúsan optimista.</p>
+<div class="row"><input id="feltAge" placeholder="Bármilyen válasz"><button id="ageBtn">Elemzés</button></div><div id="ageResult" class="ok"></div>
+<div id="codeJoke" class="code-joke" style="display:none"><code id="developerJoke"></code><button id="logicStart" style="margin-top:16px">Utolsó biztonsági ellenőrzés</button></div>
 </div>
 
 <div id="step6" class="step">
-  <div class="kicker">Neverland Security Check</div>
-  <h2>Utolsó logikai ellenőrzés</h2>
-  <p>A rendszer kamerája a következőket érzékeli:</p>
-  <div class="icons">👨‍👩‍👨‍👩‍👨‍👩‍👨 🐶 🐱 👶</div>
-  <p><strong>A szobában 7 felnőtt, 1 kisgyerek, 1 kutya és 1 cica van.</strong></p>
-  <p>Hányan vannak összesen a szobában?</p>
-  <div class="row">
-    <input id="count" type="number" inputmode="numeric" placeholder="Válasz">
-    <button id="countBtn">Válasz ellenőrzése</button>
-  </div>
-  <div id="countError" class="error"></div>
+<div class="kicker">Room Occupancy Check</div><h2>Utolsó logikai ellenőrzés</h2>
+<p>A rendszer kamerája ezt érzékeli:</p><div class="icons">👨‍👩‍👨‍👩‍👨‍👩‍👨 🐶 🐱 👶</div>
+<p><strong>7 felnőtt, 1 kisgyerek, 1 kutya és 1 cica.</strong></p><p>Hányan vannak összesen a szobában?</p>
+<div class="row"><input id="count" inputmode="numeric" placeholder="Válasz"><button id="countBtn">Ellenőrzés</button></div><div id="countError" class="error"></div>
 </div>
 
 <div id="step7" class="step">
-  <div class="kicker">Mission Complete</div>
-  <h1 id="finalTitle"></h1>
-  <p id="birthdayNote"></p>
-  <p id="finalMessage"></p>
-  <div class="final-box">
-    <div class="lock">🗝️</div>
-    <h2>Végső feladat</h2>
-    <p id="finalTask"></p>
-  </div>
-  <div class="signature">❤️ Szeretettel:<br><strong id="signature"></strong></div>
+<div class="kicker">Vault Opened - Mission Complete</div><h1 id="finalTitle"></h1><p id="birthdayNote"></p><p id="finalMessage"></p>
+<div class="badge"><div class="star">🏆</div><h2 style="margin:6px 0">Legendary Fornák Team</h2><p class="small">Achievement unlocked: Master of Escape</p></div>
+<div class="final-box"><div style="font-size:62px">🗝️</div><h2>A zsákmány helye</h2><p id="finalTask"></p></div>
+<div class="signature">❤️ Szeretettel:<br><strong id="signature"></strong></div>
 </div>
-
-</section>
-</main>
-
+</section></main>
 <script>
-const E={salt:"gmyBShGOq8wIJZe7iEAdTw==",iv:"h/NtwxYScYME2eRw",data:"6vZNSgGdRqJtCYmTLbNAO3neXgpOspwOqGmeRY7qVlYnooxR4+2Po1t+lNGcYqsJvR6Hqk5um21n8GcmMaQ9th1wxIzHuk/fQp+Ov06ReyrrlMwB1tKEalyrqtksnxr6Rn5R8Oc4o6C7YLUaTxqhvZB0u83vPzh4Ps8vaNDR0iuE32GuYyQjrBzmLWlZLjuoSH8hNe2vxZnK+08OaOTJbcclJnq4z2Cggd71MVFAxq0uV/KD7WA3iqnks94lr5bOiqOM+6HEpkpyTZOi4467jG9NplUHpeXX9tUap29q+eQHrnjwOTdfza+3NEutGt5X1l+551+AMoE5N+XY6m18ncAvaYcL3wqJj2nFNFnH7yUjUzgvKRaoiUSPpr5F/ehu6M/VwE8Il2RMNxXqJ1qJRJLrTC+efmi4rCKz879IT6Gg7IvQc5sn7r+rWTpJ7QCWigOCG+lSLGU62a7p1w8qWPfvcPbtfFhhUoLMr018D8TeyWzA9UdW6G83EskAPdm7sBVeDHCUGAMSyPYmf7pGpgzeinTKU3dN1/9BuhAGB6T6Kt07UBDwSc+uM4lrLtTBMo949xaWN5teODvFLmbTBQmcYwDfuwj1uyhmAEudcov+elba",iterations:310000};
-const te=new TextEncoder(),td=new TextDecoder(),b64u=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-const steps=[1,2,3,4,5,6,7];
-function show(n){steps.forEach(i=>document.getElementById("step"+i).classList.toggle("active",i===n));window.scrollTo(0,0)}
-function norm(s){return s.trim().toLocaleLowerCase("hu-HU").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ")}
-async function decrypt(p){
- const material=await crypto.subtle.importKey("raw",te.encode(p),"PBKDF2",false,["deriveKey"]);
- const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b64u(E.salt),iterations:E.iterations,hash:"SHA-256"},material,{name:"AES-GCM",length:256},false,["decrypt"]);
- return JSON.parse(td.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:b64u(E.iv)},key,b64u(E.data))));
-}
+const E={salt:"q7Esfx6dfn7CZwSeq+FY6w==",iv:"CMuWqZJDxrfybgcO",data:"k4wJgf87NStWOXgmIZYGB7TXet7NkHg08dE1F1+aRISqGZAYN98MooULhw1Y12JoVnlDCxAYGyAG+OHdZDLIrfgVK25AvUA5hfpO6WtdEJ9g0MJ28ei9jxlcEg+CgRz1HWIbzuKdq3IIdrjk9F2LnSkyby2Wzzga023BiSdb0rsNd61jgPOl6KTzBgwLF6Xu8AFAYdyXsegPtBTa/w5pdWqZpbupvOSPp+4SQyGurwB/KmotXHPE9qYaMFgOg5sJdpd+xdTILJQZwrX9SZKo2n+8nat/5j+pdKdtyf/slx4A00tkq8kVce/2bBwNuZpxZgs6qEGbwxb4BQAl8F//hiREKCEu7QsHxv8eWXIVSvZKvpA/ZR43PyFU5JHtqppGzYyZDEmOLPKeRxum8cUy0i9Jg0cMsMRrxzt55Dl5CVe1e86i9w06a/RhG8NBBzNRMUzN++8PU3ItILaHbmL6pEZS6Lraup6hFHd5+GDfO2gneYPlrDkYeiDCQEoT3mM+WHBxba9TX952LSuyJJpEWD49s4disBjSGYw6D6fkGyCjX4r7Syan8SiTy9Puo2H9Z9a4NDSJzJURoW0SCtm0+RbJHejf65KgW5iUW6BLdmYy+qV42AIHbs6i1F4HMYyLHIbjerSgIsLmq481MOitz4+mC2wJu7d37AYFbRNHlP1phhQagyC0+djfOpA/STkUk19mkkrD3x9wABlYkSo=",iterations:350000};
+const te=new TextEncoder(),td=new TextDecoder(),b64u=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));const steps=[1,2,3,4,5,6,7];
+const $=id=>document.getElementById(id);function vib(p){if(navigator.vibrate)navigator.vibrate(p)}function snd(id){const a=$(id);a.currentTime=0;a.play().catch(()=>{})}function show(n){steps.forEach(i=>$("step"+i).classList.toggle("active",i===n));scrollTo(0,0)}function norm(s){return s.trim().toLocaleLowerCase("hu-HU").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ")}
+async function decrypt(p){const m=await crypto.subtle.importKey("raw",te.encode(p),"PBKDF2",false,["deriveKey"]);const k=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b64u(E.salt),iterations:E.iterations,hash:"SHA-256"},m,{name:"AES-GCM",length:256},false,["decrypt"]);return JSON.parse(td.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:b64u(E.iv)},k,b64u(E.data))))}
 let secret=null;
-async function passwordCheck(){
- const btn=passwordBtn;btn.disabled=true;btn.textContent="Ellenőrzés…";passwordError.textContent="";
- try{secret=await decrypt(password.value);show(2);setTimeout(()=>{scanBar.style.width="100%";scanText.textContent="100%"},200)}
- catch(e){passwordError.textContent="Hozzáférés megtagadva. A jelszó nem megfelelő.";password.select()}
- finally{btn.disabled=false;btn.textContent="Hozzáférés"}
-}
-function teamCheck(){
- const v=norm(team.value);
- if(v==="fornak team"||v==="fornakteam"){teamError.textContent="";show(3)}
- else{teamError.textContent="A rendszer nem ismeri fel a csapatot. Tipp: a közös játékosnevetek.";team.select()}
-}
-function spinLock(code){
- [...code].forEach((d,i)=>{const el=document.getElementById("w"+(i+1));el.classList.remove("spin");void el.offsetWidth;el.classList.add("spin");
- let n=0;const t=setInterval(()=>{el.textContent=Math.floor(Math.random()*10);n++;if(n>9){clearInterval(t);el.textContent=d}},65+i*8)})
-}
-function postcodeCheck(){
- const v=postcode.value.trim();spinLock(v.padStart(4,"0").slice(-4));
- setTimeout(()=>{if(v==="2113"){postcodeError.textContent="🔓 Kód elfogadva. A zár kinyílt.";postcodeError.className="ok";setTimeout(()=>show(5),900)}
- else{postcodeError.textContent="A lakat makacs. Ellenőrizd, hol vagytok most.";postcodeError.className="error";postcode.select()}},950)
-}
-function ageCheck(){
- const v=feltAge.value.trim();
- if(!v){ageResult.textContent="A rendszer üres életkort nem tud feldolgozni. Még a születésnaposoknál sem.";return}
- const n=parseInt(v,10);
- let msg;
- if(!isNaN(n)&&n<=18) msg="Fiatalos üzemmód aktiválva. Személyi igazolványt azért nem kérünk. 😄";
- else if(!isNaN(n)&&n<=35) msg="Optimális kalandkor észlelve. Kávészint ellenőrzése ajánlott. ☕";
- else if(!isNaN(n)&&n<=60) msg="Bölcsességcsomag telepítve, kalandvágy továbbra is maximális. 😎";
- else if(!isNaN(n)) msg="A rendszer szerint ez csak tapasztalati pont. Korhatár nincs. 🗝️";
- else msg="Kreatív válasz elfogadva. A rendszer feladta az életkor-becslést. 😂";
- ageResult.textContent=msg;codeJoke.style.display="block";
-}
-function countCheck(){
- if(count.value==="10"){countError.textContent="";fillFinal();show(7);celebrate()}
- else{countError.textContent="Rendszerhiba: számold bele a négylábú ügynököket is!";count.select()}
-}
-function fillFinal(){finalTitle.textContent=secret.final_title;birthdayNote.textContent=secret.birthday_note;finalMessage.textContent=secret.message;finalTask.textContent=secret.task;signature.textContent=secret.signature}
-function celebrate(){const colors=["#d7b45a","#f2d98e","#80512f","#fff","#7a405a"];for(let i=0;i<100;i++){const p=document.createElement("div");p.className="confetti";p.style.left=Math.random()*100+"vw";p.style.background=colors[Math.floor(Math.random()*colors.length)];p.style.animationDuration=(2.7+Math.random()*3)+"s";p.style.animationDelay=Math.random()+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),7000)}}
-
-// Optional generated ambient sound; starts only after button press.
-let audioCtx=null, playing=false, timer=null;
-function tone(){
- if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
- const o=audioCtx.createOscillator(),g=audioCtx.createGain();
- o.type="sine";o.frequency.value=[196,220,247,294][Math.floor(Math.random()*4)];
- g.gain.setValueAtTime(0,audioCtx.currentTime);
- g.gain.linearRampToValueAtTime(.025,audioCtx.currentTime+.25);
- g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+2.8);
- o.connect(g).connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+3);
-}
-musicBtn.onclick=()=>{playing=!playing;musicBtn.textContent=playing?"🔇 Hangulat ki":"🎵 Hangulat";if(playing){tone();timer=setInterval(tone,2800)}else{clearInterval(timer)}};
-
-passwordBtn.onclick=passwordCheck;password.addEventListener("keydown",e=>{if(e.key==="Enter")passwordCheck()});
-teamBtn.onclick=teamCheck;team.addEventListener("keydown",e=>{if(e.key==="Enter")teamCheck()});
-postcodeStart.onclick=()=>show(4);postcodeBtn.onclick=postcodeCheck;postcode.addEventListener("keydown",e=>{if(e.key==="Enter")postcodeCheck()});
-ageBtn.onclick=ageCheck;feltAge.addEventListener("keydown",e=>{if(e.key==="Enter")ageCheck()});
-logicStart.onclick=()=>show(6);countBtn.onclick=countCheck;count.addEventListener("keydown",e=>{if(e.key==="Enter")countCheck()});
-</script>
-</body>
-</html>
+async function passwordCheck(){passwordBtn.disabled=true;passwordError.textContent="";try{secret=await decrypt(password.value);vault.classList.add("unlocking");snd("sLock");vib([80,50,140]);setTimeout(()=>{vault.classList.add("open");vaultGlow.classList.add("on");panel.classList.add("flash")},500);setTimeout(()=>{panel.classList.remove("flash");snd("sOk");show(2);setTimeout(()=>{scanBar.style.width="100%";scanText.textContent="100%"},180)},1500)}catch(e){snd("sErr");vib(180);passwordError.textContent="ACCESS DENIED - hibás jelszó.";password.select()}finally{passwordBtn.disabled=false}}
+const jokes=[
+`Compiling birthday...\n0 warnings\n0 errors\n1 surprise found.`,
+`404: Age not found.\nSuggested fix: install more cake.`,
+`coffee.exe is running...\nDo not terminate process.`,
+`git commit -m "another legendary year"\nStatus: pushed successfully.`,
+`SELECT happiness FROM life\nWHERE team = "Fornák Team";\nResult: unlimited rows.`
+];
+function teamCheck(){const v=norm(team.value);if(v==="fornak team"||v==="fornakteam"){snd("sSuccess");vib([50,40,50]);randomJoke.textContent=jokes[Math.floor(Math.random()*jokes.length)];show(3)}else{snd("sErr");teamError.textContent="Team not found. Tipp: a közös játékosnevetek.";team.select()}}
+function spinLock(code){[...code].forEach((d,i)=>{const el=$("w"+(i+1));el.classList.remove("spin");void el.offsetWidth;el.classList.add("spin");let n=0;const ti=setInterval(()=>{snd("sTick");el.textContent=Math.floor(Math.random()*10);if(++n>9){clearInterval(ti);el.textContent=d}},70+i*7)})}
+function postcodeCheck(){const v=postcode.value.trim();spinLock(v.padStart(4,"0").slice(-4));setTimeout(()=>{if(v==="2113"){snd("sLock");vib([70,40,120]);postcodeError.textContent="🔓 Kód elfogadva. A mechanikus zár kinyílt.";postcodeError.className="ok";setTimeout(()=>show(5),1050)}else{snd("sErr");postcodeError.textContent="A lakat makacs. Ellenőrizd, hol vagytok.";postcodeError.className="error"}},1100)}
+const devJokes=[
+`if (feltAge < actualAge) {\n  status = "Fiatalos üzemmód aktiválva";\n} else {\n  status = "Bölcsességcsomag telepítve";\n}\n\nwhile (cakeExists) { eatCake(); }`,
+`try {\n  celebrateBirthday();\n} catch (TooMuchCakeException e) {\n  eatOneMoreSlice();\n}`,
+`const age = "classified";\nconst experience = Infinity;\nconst fun = true;`,
+`// TODO: grow older\n// FIXME: absolutely no need to grow up`
+];
+function ageCheck(){const v=feltAge.value.trim();if(!v){snd("sErr");ageResult.textContent="Üres életkort még a rendszer sem fogad el.";return}const n=parseInt(v);let m;if(!isNaN(n)&&n<=18)m="Optimista üzemmód aktiválva. Személyit nem kérünk. 😄";else if(!isNaN(n)&&n<=35)m="Optimális kalandkor észlelve. Kávé ajánlott. ☕";else if(!isNaN(n)&&n<=60)m="Bölcsességcsomag telepítve, kalandvágy: MAXIMUM. 😎";else if(!isNaN(n))m="Ez csak tapasztalati pont. Korhatár nincs. 🗝️";else m="Kreatív válasz elfogadva. Az életkor-becslő modul feladta. 😂";snd("sOk");ageResult.textContent=m;developerJoke.textContent=devJokes[Math.floor(Math.random()*devJokes.length)];codeJoke.style.display="block"}
+function countCheck(){if(count.value.trim()==="10"){countError.textContent="";finalSequence()}else{snd("sErr");vib(120);countError.textContent="Számold bele a négylábú ügynököket is!";count.select()}}
+function fillFinal(){finalTitle.textContent=secret.title;birthdayNote.textContent=secret.birthday;finalMessage.textContent=secret.message;finalTask.textContent=secret.final;signature.textContent=secret.signature}
+async function finalSequence(){overlay.classList.add("show");for(const x of ["3","2","1"]){countdown.textContent=x;snd("sCount");vib(55);await new Promise(r=>setTimeout(r,850))}countdown.textContent="🔓";snd("sLock");vib([100,70,180]);await new Promise(r=>setTimeout(r,950));overlay.classList.remove("show");fillFinal();show(7);snd("sSuccess");celebrate()}
+function celebrate(){const cs=["#d8b25a","#f4dc9b","#a71420","#fff","#7a405a"];for(let i=0;i<125;i++){const p=document.createElement("div");p.className="confetti";p.style.left=Math.random()*100+"vw";p.style.background=cs[Math.floor(Math.random()*cs.length)];p.style.animationDuration=(2.7+Math.random()*3)+"s";p.style.animationDelay=Math.random()+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),7000)}}
+let current=null;function playMusic(id){["music1","music2"].forEach(x=>{$(x).pause();$(x).currentTime=0});current=$(id);current.volume=.28;current.play().catch(()=>{});musicMenu.classList.remove("show");musicBtn.textContent=id==="music1"?"🏦 Páncélterem":"✨ Misztikus"}
+musicBtn.onclick=()=>musicMenu.classList.toggle("show");m1.onclick=()=>playMusic("music1");m2.onclick=()=>playMusic("music2");mOff.onclick=()=>{["music1","music2"].forEach(x=>$(x).pause());musicBtn.textContent="🎵 Zene";musicMenu.classList.remove("show")};
+passwordBtn.onclick=passwordCheck;password.onkeydown=e=>e.key==="Enter"&&passwordCheck();teamBtn.onclick=teamCheck;team.onkeydown=e=>e.key==="Enter"&&teamCheck();postcodeStart.onclick=()=>show(4);postcodeBtn.onclick=postcodeCheck;postcode.onkeydown=e=>e.key==="Enter"&&postcodeCheck();ageBtn.onclick=ageCheck;feltAge.onkeydown=e=>e.key==="Enter"&&ageCheck();logicStart.onclick=()=>show(6);countBtn.onclick=countCheck;count.onkeydown=e=>e.key==="Enter"&&countCheck();
+</script></body></html>
