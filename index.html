@@ -39,15 +39,15 @@ p{font-size:clamp(17px,3.1vw,20px);line-height:1.65}.small{font-size:13px;color:
 <main><section class="panel">
 <div id="step1" class="step active"><div class="kicker">Project 2113 - Secure Vault Protocol</div><div class="vault-wrap"><div id="vault" class="vault"></div></div><h2>Szigorúan bizalmas küldetés</h2><p>Kizárólag Melinda részére.</p><div class="terminal">Connecting to secure vault...<br>Loading player profile...<br>Encrypted mission detected...</div><div class="row"><input id="password" type="password" placeholder="Hozzáférési jelszó" autocomplete="off" inputmode="text" aria-label="Hozzáférési jelszó"><button id="passwordBtn">Belépés</button></div><div id="passwordError" class="error"></div></div>
 
-<div id="step2" class="step"><div class="kicker">Player Database</div><h2>Játékos azonosítása</h2><div class="terminal">Searching database...<div class="bar"><span id="scanBar"></span></div><span id="scanText">0%</span></div><p><strong>Mi a közös csapatnevetek, amikor szabadulószobában játszotok?</strong></p><div class="row"><input id="team" placeholder="Csapatnév"><button id="teamBtn">Azonosítás</button></div><div id="teamError" class="error"></div></div>
+<div id="step2" class="step"><div class="kicker">Player Database</div><h2>Játékos azonosítása</h2><div class="terminal">Searching database...<div class="bar"><span id="scanBar"></span></div><span id="scanText">0%</span></div><p><strong>Mi a közös csapatnevetek, amikor szabadulószobában játszotok?</strong></p><div class="row"><input id="team" type="text" placeholder="Csapatnév" autocomplete="off" enterkeyhint="done"><button id="teamBtn">Azonosítás</button></div><div id="teamError" class="error"></div></div>
 
 <div id="step3" class="step"><div class="kicker">Identity Verified</div><h2>Üdv újra, Fornák Team!</h2><div class="stats"><div class="stat"><span>Team found</span><b>CONFIRMED</b></div><div class="stat"><span>Coffee level</span><b>98%</b></div><div class="stat"><span>Puzzle arguments</span><b>CLASSIFIED</b></div><div class="stat"><span>Humor</span><b>∞</b></div><div class="stat"><span>Team spirit</span><b>100%</b></div><div class="stat"><span>Születésnap</span><b>JÚLIUS 3. - MEGÜNNEPELVE</b></div></div><div id="randomJoke" class="terminal"></div><button id="postcodeStart">Kódlakat aktiválása</button></div>
 
-<div id="step4" class="step"><div class="kicker">Mechanical Vault Lock</div><h2>Helymeghatározási kód</h2><p>Add meg annak a helynek az irányítószámát, ahol most vagytok.</p><div class="code-lock"><div class="wheel" id="w1">0</div><div class="wheel" id="w2">0</div><div class="wheel" id="w3">0</div><div class="wheel" id="w4">0</div></div><div class="row"><input id="postcode" inputmode="numeric" placeholder="Irányítószám"><button id="postcodeBtn">Zár próbája</button></div><div id="postcodeError" class="error"></div></div>
+<div id="step4" class="step"><div class="kicker">Mechanical Vault Lock</div><h2>Helymeghatározási kód</h2><p>Add meg annak a helynek az irányítószámát, ahol most vagytok.</p><div class="code-lock"><div class="wheel" id="w1">0</div><div class="wheel" id="w2">0</div><div class="wheel" id="w3">0</div><div class="wheel" id="w4">0</div></div><div class="row"><input id="postcode" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="Irányítószám" autocomplete="off" enterkeyhint="done"><button id="postcodeBtn">Zár próbája</button></div><div id="postcodeError" class="error"></div></div>
 
-<div id="step5" class="step"><div class="kicker">Biometric Age Scanner</div><h2>Hány évesnek érzed magad?</h2><p>Nincs rossz válasz. Csak gyanúsan optimista.</p><div class="row"><input id="feltAge" placeholder="Bármilyen válasz"><button id="ageBtn">Elemzés</button></div><div id="ageResult" class="ok"></div><div id="codeJoke" class="code-joke" style="display:none"><code id="developerJoke"></code><button id="logicStart" style="margin-top:16px">Utolsó ellenőrzés</button></div></div>
+<div id="step5" class="step"><div class="kicker">Biometric Age Scanner</div><h2>Hány évesnek érzed magad?</h2><p>Nincs rossz válasz. Csak gyanúsan optimista.</p><div class="row"><input id="feltAge" type="text" placeholder="Bármilyen válasz" autocomplete="off" enterkeyhint="done"><button id="ageBtn">Elemzés</button></div><div id="ageResult" class="ok"></div><div id="codeJoke" class="code-joke" style="display:none"><code id="developerJoke"></code><button id="logicStart" style="margin-top:16px">Utolsó ellenőrzés</button></div></div>
 
-<div id="step6" class="step"><div class="kicker">Room Occupancy Check</div><h2>Utolsó logikai ellenőrzés</h2><div class="icons">👨‍👩‍👨‍👩‍👨‍👩‍👨 🐶 🐱 👶</div><p><strong>7 felnőtt, 1 kisgyerek, 1 kutya és 1 cica.</strong></p><p>Hányan vannak összesen a szobában?</p><div class="row"><input id="count" inputmode="numeric" placeholder="Válasz"><button id="countBtn">Ellenőrzés</button></div><div id="countError" class="error"></div></div>
+<div id="step6" class="step"><div class="kicker">Room Occupancy Check</div><h2>Utolsó logikai ellenőrzés</h2><div class="icons">👨‍👩‍👨‍👩‍👨‍👩‍👨 🐶 🐱 👶</div><p><strong>7 felnőtt, 1 kisgyerek, 1 kutya és 1 cica.</strong></p><p>Hányan vannak összesen a szobában?</p><div class="row"><input id="count" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="Válasz" autocomplete="off" enterkeyhint="done"><button id="countBtn">Ellenőrzés</button></div><div id="countError" class="error"></div></div>
 
 <div id="step7" class="step"><div class="kicker">Vault Opened - Mission Complete</div><h1 id="finalTitle"></h1><p id="birthdayNote"></p><p id="finalMessage"></p><div class="badge"><div style="font-size:42px">🏆</div><h2 style="margin:6px 0">Legendary Fornák Team</h2><p class="small">Achievement unlocked: Master of Escape</p></div><div class="final-box"><div style="font-size:62px">🗝️</div><h2>A zsákmány helye</h2><p id="finalTask"></p></div><div class="signature">❤️ Szeretettel:<br><strong id="signature"></strong></div></div>
 </section></main>
@@ -62,10 +62,10 @@ async function passwordCheck(){$("passwordBtn").disabled=true;$("passwordError")
 const jokes=[`Compiling birthday...\n0 warnings\n0 errors\n1 surprise found.`,`404: Age not found.\nSuggested fix: install more cake.`,`coffee.exe is running...\nDo not terminate process.`,`git commit -m "another legendary year"\nStatus: pushed successfully.`];
 function teamCheck(){const v=norm($("team").value);if(v==="fornak team"||v==="fornakteam"){snd("sSuccess");$("randomJoke").textContent=jokes[Math.floor(Math.random()*jokes.length)];show(3)}else{snd("sErr");$("teamError").textContent="Team not found. Tipp: a közös játékosnevetek."}}
 function spinLock(code){[...code].forEach((d,i)=>{const el=$("w"+(i+1));el.classList.remove("spin");void el.offsetWidth;el.classList.add("spin");let n=0;const ti=setInterval(()=>{snd("sTick");el.textContent=Math.floor(Math.random()*10);if(++n>9){clearInterval(ti);el.textContent=d}},70+i*7)})}
-function postcodeCheck(){const v=$("postcode").value.trim();spinLock(v.padStart(4,"0").slice(-4));setTimeout(()=>{if(v==="2113"){snd("sLock");vib([70,40,120]);$("postcodeError").textContent="🔓 Kód elfogadva. A mechanikus zár kinyílt.";$("postcodeError").className="ok";setTimeout(()=>show(5),1050)}else{snd("sErr");$("postcodeError").textContent="A lakat makacs. Ellenőrizd, hol vagytok.";$("postcodeError").className="error"}},1100)}
+function postcodeCheck(){const v=$("postcode").value.replace(/[^0-9]/g,"").trim();spinLock(v.padStart(4,"0").slice(-4));setTimeout(()=>{if(v==="2113"){snd("sLock");vib([70,40,120]);$("postcodeError").textContent="🔓 Kód elfogadva. A mechanikus zár kinyílt.";$("postcodeError").className="ok";setTimeout(()=>show(5),1050)}else{snd("sErr");$("postcodeError").textContent="A lakat makacs. Ellenőrizd, hol vagytok.";$("postcodeError").className="error"}},1100)}
 const devJokes=[`if (feltAge < actualAge) {\n  status = "Fiatalos üzemmód aktiválva";\n} else {\n  status = "Bölcsességcsomag telepítve";\n}\n\nwhile (cakeExists) { eatCake(); }`,`try {\n  celebrateBirthday();\n} catch (TooMuchCakeException e) {\n  eatOneMoreSlice();\n}`,`const age = "classified";\nconst experience = Infinity;\nconst fun = true;`];
 function ageCheck(){const v=$("feltAge").value.trim();if(!v){snd("sErr");$("ageResult").textContent="Üres életkort még a rendszer sem fogad el.";return}const n=parseInt(v);let m;if(!isNaN(n)&&n<=18)m="Optimista üzemmód aktiválva. 😄";else if(!isNaN(n)&&n<=35)m="Optimális kalandkor észlelve. ☕";else if(!isNaN(n)&&n<=60)m="Bölcsességcsomag telepítve. 😎";else if(!isNaN(n))m="Ez csak tapasztalati pont. Korhatár nincs. 🗝️";else m="Kreatív válasz elfogadva. 😂";snd("sOk");$("ageResult").textContent=m;$("developerJoke").textContent=devJokes[Math.floor(Math.random()*devJokes.length)];$("codeJoke").style.display="block"}
-function countCheck(){if($("count").value.trim()==="10")finalSequence();else{snd("sErr");$("countError").textContent="Számold bele a négylábú ügynököket is!"}}
+function countCheck(){if($("count").value.replace(/[^0-9]/g,"").trim()==="10")finalSequence();else{snd("sErr");$("countError").textContent="Számold bele a négylábú ügynököket is!"}}
 function fillFinal(){$("finalTitle").textContent=secret.title;$("birthdayNote").textContent=secret.birthday;$("finalMessage").textContent=secret.message;$("finalTask").textContent=secret.final;$("signature").textContent=secret.signature}
 async function finalSequence(){$("overlay").classList.add("show");for(const x of ["3","2","1"]){$("countdown").textContent=x;snd("sCount");vib(55);await new Promise(r=>setTimeout(r,850))}$("countdown").textContent="🔓";snd("sLock");await new Promise(r=>setTimeout(r,950));$("overlay").classList.remove("show");fillFinal();show(7);snd("sSuccess");celebrate()}
 function celebrate(){const cs=["#d8b25a","#f4dc9b","#a71420","#fff"];for(let i=0;i<110;i++){const p=document.createElement("div");p.className="confetti";p.style.left=Math.random()*100+"vw";p.style.background=cs[Math.floor(Math.random()*cs.length)];p.style.animationDuration=(2.7+Math.random()*3)+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),7000)}}
@@ -78,6 +78,21 @@ document.addEventListener("DOMContentLoaded",()=> {
   pw.removeAttribute("disabled");
   pw.readOnly=false;
   pw.style.pointerEvents="auto";
-  pw.addEventListener("touchstart",()=>pw.focus(),{passive:true});
+  });
+
+document.addEventListener("DOMContentLoaded",()=> {
+  ["postcode","count"].forEach(id=>{
+    const el=$(id);
+    el.disabled=false;
+    el.readOnly=false;
+    el.style.pointerEvents="auto";
+    el.addEventListener("input",()=>{
+      const max=id==="postcode"?4:2;
+      const start=el.selectionStart;
+      const cleaned=el.value.replace(/[^0-9]/g,"").slice(0,max);
+      if(el.value!==cleaned) el.value=cleaned;
+      try { el.setSelectionRange(Math.min(start,cleaned.length),Math.min(start,cleaned.length)); } catch(e) {}
+    });
+  });
 });
 </script></body></html>
