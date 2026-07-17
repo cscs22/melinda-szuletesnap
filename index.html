@@ -278,15 +278,56 @@ function ageCheck(){ensureAudio();
 function countCheck(){ensureAudio();
  const field=$("countInput"),error=$("countError");
  const v=field.value.replace(/\D/g,"");
- if(v==="10"){error.textContent="";finalSequence()}
+ if(v==="10"){error.textContent="";$("countButton").disabled=true;finalSequence()}
  else{soundError();error.textContent="Számold bele a négylábú ügynököket is!";field.focus()}
 }
 function fillFinal(){$("finalTitle").textContent=secret.title;$("birthdayNote").textContent=secret.birthday;$("finalMessage").textContent=secret.message;$("finalTask").textContent=secret.final;$("signature").textContent=secret.signature}
-async function finalSequence(){
- $("overlay").classList.add("show");
- for(const x of ["3","2","1"]){$("countdown").textContent=x;beep(330,.1,.06);await new Promise(r=>setTimeout(r,800))}
- $("countdown").textContent="🔓";soundLock();await new Promise(r=>setTimeout(r,850));
- $("overlay").classList.remove("show");fillFinal();showStep(7);soundSuccess();celebrate();
+let finalRunning=false;
+function finalSequence(){
+  if(finalRunning)return;
+  finalRunning=true;
+
+  const overlay=$("overlay");
+  const display=$("countdown");
+  overlay.classList.add("show");
+
+  const stages=[
+    {text:"3",delay:700,sound:"beep"},
+    {text:"2",delay:700,sound:"beep"},
+    {text:"1",delay:700,sound:"beep"},
+    {text:"🔓",delay:850,sound:"lock"}
+  ];
+
+  let index=0;
+  function nextStage(){
+    if(index>=stages.length){
+      overlay.classList.remove("show");
+      fillFinal();
+      showStep(7);
+      try{soundSuccess()}catch(e){}
+      celebrate();
+      finalRunning=false;
+      return;
+    }
+
+    const stage=stages[index++];
+    display.textContent=stage.text;
+
+    try{
+      if(stage.sound==="lock")soundLock();
+      else beep(330,.1,.06);
+    }catch(e){}
+
+    // Két képkockát várunk, hogy a szám biztosan kirajzolódjon,
+    // utána indul csak a következő időzítés.
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        window.setTimeout(nextStage,stage.delay);
+      });
+    });
+  }
+
+  nextStage();
 }
 function celebrate(){
  const colors=["#d8b25a","#f4dc9b","#a71420","#fff"];
