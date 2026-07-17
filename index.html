@@ -39,16 +39,31 @@ button.secondary{background:#17140e;color:var(--gold2);border:1px solid #5c4e32}
 .icons{font-size:34px;letter-spacing:.1em;margin:22px 0}
 .final-box{margin-top:28px;padding:25px;border:1px solid rgba(216,178,90,.55);border-radius:20px;background:linear-gradient(145deg,rgba(216,178,90,.11),rgba(255,255,255,.025))}
 .signature{font-family:Georgia,serif;color:var(--gold2);font-size:23px;margin-top:26px;padding-bottom:28px}
-.music{position:fixed;right:14px;top:14px;z-index:20;border-radius:999px;padding:12px 15px;font-size:14px}
+
 .overlay{position:fixed;inset:0;background:#000;z-index:50;display:none;place-items:center;text-align:center}.overlay.show{display:grid}
 .count{font:900 clamp(80px,25vw,180px)/1 Georgia,serif;color:var(--gold2)}
 .confetti{position:fixed;top:-18px;width:9px;height:15px;z-index:55;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(900deg)}}
+
+.cake-scene{display:grid;place-items:center;margin:26px 0 10px;min-height:230px}
+.cake{position:relative;width:220px;height:145px;animation:cakePop 1s cubic-bezier(.2,.9,.2,1) both}
+.cake-layer{position:absolute;left:20px;width:180px;border-radius:20px;background:linear-gradient(180deg,#f8d7b0,#d89b63);box-shadow:inset 0 -12px 0 rgba(120,55,25,.18),0 18px 35px #0007}
+.cake-layer.bottom{height:70px;bottom:0}
+.cake-layer.top{height:55px;bottom:55px;left:42px;width:136px}
+.icing{position:absolute;left:42px;bottom:95px;width:136px;height:28px;border-radius:18px;background:linear-gradient(180deg,#fff5ed,#f2c9c1);box-shadow:0 8px 0 -3px #eab8ad}
+.candle{position:absolute;bottom:122px;width:12px;height:42px;border-radius:5px;background:repeating-linear-gradient(45deg,#f7e0a0 0 6px,#c93447 6px 12px);transform-origin:bottom}
+.candle.c1{left:72px}.candle.c2{left:104px}.candle.c3{left:136px}
+.flame{position:absolute;left:1px;top:-22px;width:10px;height:20px;border-radius:50% 50% 45% 45%;background:radial-gradient(circle at 50% 65%,#fff7b1 0 25%,#ffb23f 26% 62%,#ff6a2f 63%);filter:drop-shadow(0 0 9px #ffb23f);animation:flicker .22s infinite alternate}
+.cake-spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#f4dc9b;animation:spark 1.5s ease-out infinite}
+.cake-spark.s1{left:35px;top:25px;animation-delay:.1s}.cake-spark.s2{right:35px;top:38px;animation-delay:.5s}.cake-spark.s3{left:100px;top:0;animation-delay:.9s}
+@keyframes flicker{from{transform:scale(.9) rotate(-3deg)}to{transform:scale(1.08) rotate(3deg)}}
+@keyframes cakePop{from{opacity:0;transform:translateY(28px) scale(.82)}to{opacity:1;transform:none}}
+@keyframes spark{0%{opacity:0;transform:translateY(10px) scale(.4)}35%{opacity:1}100%{opacity:0;transform:translateY(-60px) scale(1.4)}}
+
 @media(max-width:560px){.row{flex-direction:column}button{width:100%}.wheel{width:58px;height:78px;font-size:36px}}
 </style>
 </head>
 <body>
-<button id="musicButton" class="music secondary" type="button">🎵 Zene be</button>
 <div id="overlay" class="overlay"><div><div class="kicker">Decrypting reward</div><div id="countdown" class="count">3</div></div></div>
 
 <main><section class="panel">
@@ -104,6 +119,18 @@ button.secondary{background:#17140e;color:var(--gold2);border:1px solid #5c4e32}
 <div id="step7" class="step">
 <div class="kicker">Vault Opened – Mission Complete</div>
 <h1 id="finalTitle"></h1><p id="birthdayNote"></p><p id="finalMessage"></p>
+
+<div class="cake-scene" aria-label="Animált születésnapi torta">
+  <div class="cake">
+    <div class="cake-spark s1"></div><div class="cake-spark s2"></div><div class="cake-spark s3"></div>
+    <div class="cake-layer bottom"></div>
+    <div class="cake-layer top"></div>
+    <div class="icing"></div>
+    <div class="candle c1"><span class="flame"></span></div>
+    <div class="candle c2"><span class="flame"></span></div>
+    <div class="candle c3"><span class="flame"></span></div>
+  </div>
+</div>
 <div class="final-box"><div style="font-size:62px">🗝️</div><h2>A zsákmány helye</h2><p id="finalTask"></p></div>
 <div class="signature">❤️ Szeretettel:<br><strong id="signature"></strong></div>
 </div>
@@ -121,25 +148,65 @@ function showStep(n){steps.forEach(i=>$("step"+i).classList.toggle("active",i===
 function normalise(s){return s.trim().toLocaleLowerCase("hu-HU").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ")}
 function vibrate(pattern){if(navigator.vibrate)navigator.vibrate(pattern)}
 
-let audioCtx=null, ambienceTimer=null, ambienceOn=false;
-function ctx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx}
-function beep(freq=440,dur=.15,vol=.05,type="sine",delay=0){
- const c=ctx(),o=c.createOscillator(),g=c.createGain(),start=c.currentTime+delay;
- o.type=type;o.frequency.setValueAtTime(freq,start);
- g.gain.setValueAtTime(0,start);g.gain.linearRampToValueAtTime(vol,start+.015);g.gain.exponentialRampToValueAtTime(.001,start+dur);
- o.connect(g).connect(c.destination);o.start(start);o.stop(start+dur+.03);
-}
-function soundOk(){beep(520,.12,.06);beep(780,.16,.06,"sine",.15);beep(1040,.26,.05,"sine",.34)}
-function soundError(){beep(210,.15,.06,"square");beep(150,.22,.05,"square",.19)}
-function soundLock(){beep(140,.12,.07,"square");beep(90,.2,.06,"square",.14);beep(760,.45,.04,"sine",.35)}
-function soundTick(){beep(1250,.035,.025)}
-function startAmbience(){
- if(ambienceOn)return;ambienceOn=true;$("musicButton").textContent="🔇 Zene ki";
- const pulse=()=>{beep(110,2.4,.012);beep(165,2.2,.008,"sine",.2);beep(220,1.8,.006,"sine",.5)};
- pulse();ambienceTimer=setInterval(pulse,3000);
-}
-function stopAmbience(){ambienceOn=false;clearInterval(ambienceTimer);$("musicButton").textContent="🎵 Zene be"}
 
+let audioCtx=null,master=null,ambienceNodes=[],audioStarted=false;
+function ctx(){
+  if(!audioCtx){
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    master=audioCtx.createGain();
+    master.gain.value=.55;
+    master.connect(audioCtx.destination);
+  }
+  return audioCtx;
+}
+function gainNode(v=1){const g=ctx().createGain();g.gain.value=v;g.connect(master);return g}
+function osc(freq,type="sine",start=0,dur=.2,vol=.08){
+  const c=ctx(),o=c.createOscillator(),g=c.createGain(),t=c.currentTime+start;
+  o.type=type;o.frequency.setValueAtTime(freq,t);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g).connect(master);o.start(t);o.stop(t+dur+.03);
+}
+function noise(start=0,dur=.2,vol=.05,low=100,high=3000){
+  const c=ctx(),len=Math.max(1,Math.floor(c.sampleRate*dur)),buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);
+  const s=c.createBufferSource(),bp=c.createBiquadFilter(),g=c.createGain(),t=c.currentTime+start;
+  bp.type="bandpass";bp.frequency.value=(low+high)/2;bp.Q.value=.7;
+  g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  s.buffer=buf;s.connect(bp).connect(g).connect(master);s.start(t);s.stop(t+dur);
+}
+function soundOk(){osc(520,"sine",0,.12,.06);osc(780,"sine",.13,.17,.065);osc(1040,"triangle",.31,.28,.055)}
+function soundError(){osc(180,"sawtooth",0,.18,.05);osc(120,"square",.15,.28,.045);noise(.02,.3,.025,80,500)}
+function soundTick(){osc(1500,"square",0,.028,.018);noise(0,.04,.02,1200,5000)}
+function soundLock(){
+  noise(0,.18,.08,80,1200);osc(95,"square",0,.22,.07);
+  noise(.18,.12,.06,300,2500);osc(145,"sawtooth",.18,.16,.05);
+  for(let i=0;i<5;i++){soundTickAt(.34+i*.07)}
+  osc(720,"sine",.72,.42,.045);osc(360,"triangle",.72,.5,.03);
+}
+function soundTickAt(delay){osc(1350+Math.random()*220,"square",delay,.025,.014);noise(delay,.035,.012,900,5000)}
+function soundSuccess(){
+  [392,523.25,659.25,783.99].forEach((f,i)=>osc(f,i<2?"triangle":"sine",i*.12,.85-i*.08,.045));
+  noise(.05,.7,.018,1200,6000);
+}
+function startAmbience(){
+  if(audioStarted)return;
+  audioStarted=true;
+  const c=ctx();
+  if(c.state==="suspended")c.resume();
+  const out=gainNode(.22);
+  const freqs=[55,82.4,110];
+  freqs.forEach((f,i)=>{
+    const o=c.createOscillator(),g=c.createGain(),lfo=c.createOscillator(),lg=c.createGain();
+    o.type=i===0?"sine":"triangle";o.frequency.value=f;
+    g.gain.value=i===0?.035:.018;
+    lfo.frequency.value=.05+i*.017;lg.gain.value=.008;
+    lfo.connect(lg).connect(g.gain);o.connect(g).connect(out);o.start();lfo.start();
+    ambienceNodes.push(o,lfo,g,lg);
+  });
+}
+function ensureAudio(){startAmbience()}
+document.addEventListener("pointerdown",ensureAudio,{once:true,passive:true});
+document.addEventListener("keydown",ensureAudio,{once:true});
 async function decrypt(p){
  const m=await crypto.subtle.importKey("raw",te.encode(p),"PBKDF2",false,["deriveKey"]);
  const k=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b64u(E.salt),iterations:E.iterations,hash:"SHA-256"},m,{name:"AES-GCM",length:256},false,["decrypt"]);
@@ -148,7 +215,7 @@ async function decrypt(p){
 }
 
 let secret=null;
-async function passwordCheck(){
+async function passwordCheck(){ensureAudio();
  const field=$("passwordInput"),error=$("passwordError"),button=$("passwordButton");
  button.disabled=true;error.textContent="";
  try{
@@ -166,7 +233,7 @@ const jokes=[
 `coffee.exe is running...\nDo not terminate process.`,
 `git commit -m "another legendary year"\nStatus: pushed successfully.`
 ];
-function teamCheck(){
+function teamCheck(){ensureAudio();
  const field=$("teamInput"),error=$("teamError");
  const v=normalise(field.value);
  if(v==="team fornak"||v==="teamfornak"||v==="fornak team"||v==="fornakteam"){soundOk();error.textContent="";$("randomJoke").textContent=jokes[Math.floor(Math.random()*jokes.length)];showStep(3)}
@@ -179,7 +246,7 @@ function spinLock(code){
    let n=0;const timer=setInterval(()=>{soundTick();el.textContent=Math.floor(Math.random()*10);if(++n>8){clearInterval(timer);el.textContent=d}},80+i*10);
  });
 }
-function postcodeCheck(){
+function postcodeCheck(){ensureAudio();
  const field=$("postcodeInput"),error=$("postcodeError");
  const v=field.value.replace(/\D/g,"").slice(0,4);
  spinLock(v.padStart(4,"0"));
@@ -194,7 +261,7 @@ const devJokes=[
 `try {\n  celebrateBirthday();\n} catch (TooMuchCakeException e) {\n  eatOneMoreSlice();\n}`,
 `const age = "classified";\nconst experience = Infinity;\nconst fun = true;`
 ];
-function ageCheck(){
+function ageCheck(){ensureAudio();
  const field=$("ageInput"),result=$("ageResult");
  const v=field.value.trim();
  if(!v){soundError();result.textContent="Üres életkort még a rendszer sem fogad el.";return}
@@ -208,7 +275,7 @@ function ageCheck(){
  soundOk();result.textContent=msg;$("developerJoke").textContent=devJokes[Math.floor(Math.random()*devJokes.length)];$("codeJoke").style.display="block";
 }
 
-function countCheck(){
+function countCheck(){ensureAudio();
  const field=$("countInput"),error=$("countError");
  const v=field.value.replace(/\D/g,"");
  if(v==="10"){error.textContent="";finalSequence()}
@@ -219,7 +286,7 @@ async function finalSequence(){
  $("overlay").classList.add("show");
  for(const x of ["3","2","1"]){$("countdown").textContent=x;beep(330,.1,.06);await new Promise(r=>setTimeout(r,800))}
  $("countdown").textContent="🔓";soundLock();await new Promise(r=>setTimeout(r,850));
- $("overlay").classList.remove("show");fillFinal();showStep(7);soundOk();celebrate();
+ $("overlay").classList.remove("show");fillFinal();showStep(7);soundSuccess();celebrate();
 }
 function celebrate(){
  const colors=["#d8b25a","#f4dc9b","#a71420","#fff"];
@@ -227,8 +294,7 @@ function celebrate(){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
- $("musicButton").addEventListener("click",()=>ambienceOn?stopAmbience():startAmbience());
- $("passwordButton").addEventListener("click",passwordCheck);
+$("passwordButton").addEventListener("click",passwordCheck);
  $("teamButton").addEventListener("click",teamCheck);
  $("postcodeStartButton").addEventListener("click",()=>showStep(4));
  $("postcodeButton").addEventListener("click",postcodeCheck);
