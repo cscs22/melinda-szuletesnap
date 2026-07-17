@@ -38,8 +38,8 @@ button.secondary{background:#17140e;color:var(--gold2);border:1px solid #5c4e32}
 .code-joke code{display:block;white-space:pre-wrap;background:#040404;border:1px solid #353024;border-radius:14px;padding:18px;text-align:left;font:14px/1.65 ui-monospace,monospace;color:#d8edc6}
 .icons{font-size:34px;letter-spacing:.1em;margin:22px 0}
 .final-box{margin-top:28px;padding:25px;border:1px solid rgba(216,178,90,.55);border-radius:20px;background:linear-gradient(145deg,rgba(216,178,90,.11),rgba(255,255,255,.025))}
-.signature{font-family:Georgia,serif;color:var(--gold2);font-size:23px;margin-top:26px}
-.music{position:fixed;right:14px;bottom:14px;z-index:20;border-radius:999px;padding:12px 15px;font-size:14px}
+.signature{font-family:Georgia,serif;color:var(--gold2);font-size:23px;margin-top:26px;padding-bottom:28px}
+.music{position:fixed;right:14px;top:14px;z-index:20;border-radius:999px;padding:12px 15px;font-size:14px}
 .overlay{position:fixed;inset:0;background:#000;z-index:50;display:none;place-items:center;text-align:center}.overlay.show{display:grid}
 .count{font:900 clamp(80px,25vw,180px)/1 Georgia,serif;color:var(--gold2)}
 .confetti{position:fixed;top:-18px;width:9px;height:15px;z-index:55;animation:fall linear forwards}
@@ -70,7 +70,7 @@ button.secondary{background:#17140e;color:var(--gold2);border:1px solid #5c4e32}
 </div>
 
 <div id="step3" class="step">
-<div class="kicker">Identity Verified</div><h2>Üdv újra, Fornák Team!</h2>
+<div class="kicker">Identity Verified</div><h2>Üdv újra, Team Fornák!</h2>
 <div class="stats"><div class="stat"><span>Team found</span><b>CONFIRMED</b></div><div class="stat"><span>Coffee level</span><b>98%</b></div><div class="stat"><span>Puzzle arguments</span><b>CLASSIFIED</b></div><div class="stat"><span>Humor</span><b>∞</b></div><div class="stat"><span>Team spirit</span><b>100%</b></div></div>
 <div id="randomJoke" class="terminal"></div>
 <button id="postcodeStartButton" type="button">Kódlakat aktiválása</button>
@@ -169,7 +169,7 @@ const jokes=[
 function teamCheck(){
  const field=$("teamInput"),error=$("teamError");
  const v=normalise(field.value);
- if(v==="fornak team"||v==="fornakteam"){soundOk();error.textContent="";$("randomJoke").textContent=jokes[Math.floor(Math.random()*jokes.length)];showStep(3)}
+ if(v==="team fornak"||v==="teamfornak"||v==="fornak team"||v==="fornakteam"){soundOk();error.textContent="";$("randomJoke").textContent=jokes[Math.floor(Math.random()*jokes.length)];showStep(3)}
  else{soundError();error.textContent="Team not found. Tipp: a közös játékosnevetek.";field.focus()}
 }
 
